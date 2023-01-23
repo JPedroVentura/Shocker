@@ -8,4 +8,4 @@ O teste abaixo foi realizado em ambiente controlado e com as devidas permissões
 
 <strong>python3 .\shocker.py -u *TARGET* -c "ls" </strong>
 
-![image](https://user-images.githubusercontent.com/86115368/213880194-4715b4b1-bd45-416c-a4ed-172011f4165c.png)
+![image](https://user-images.githubusercontent.com/86115368/214044305-95df0c3e-2a9e-4c43-9073-b67f7bb929f0.png)
