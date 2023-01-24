@@ -6,6 +6,6 @@ A vulnerabilidade foi atualizada (CVE-2014-7169) logo após e foi modificada at�
 
 O teste abaixo foi realizado em ambiente controlado e com as devidas permissões :wink:
 
-<strong>python3 .\shocker.py -u *TARGET* -c "ls" </strong>
+<strong>python3 .\shocker.py -u *TARGET* -c "id" </strong>
 
 ![image](https://user-images.githubusercontent.com/86115368/214044305-95df0c3e-2a9e-4c43-9073-b67f7bb929f0.png)
